@@ -2,13 +2,15 @@
 @name        Scrollbars Customized
 @version     0.0.1
 @description Global overlay scrollbars customized
-@!forked-from https://github.com/StylishThemes/Overlay-Scrollbars
 @namespace   thunder/scrollbars
 @author      StylishThemes
+@license     CC-BY-SA-4.0
+@!forked-from https://github.com/StylishThemes/Overlay-Scrollbars
+@!edited to include custom width
+
 @homepageURL https://github.com/Thunder33345/userstyles
 @updateURL   https://github.com/Thunder33345/userstyles/raw/master/scrollbar-customized.user.css
-@license     CC-BY-SA-4.0
-@!edited to include custom width
+
 @preprocessor default
 @advanced color custom-thumb-color            "Scrollbar thumb color" rgba(69, 74, 77, 1)
 @advanced color custom-track-color            "Scrollbar track color" rgba(32, 35, 36, 1)
@@ -38,54 +40,62 @@
 }
 ==/UserStyle== */
 *:not(select) {
-    scrollbar-color: var(--custom-thumb-color) var(--custom-track-color) !important;
-    scrollbar-width: var(--custom-width) !important;
+	scrollbar-color: var(--custom-thumb-color) var(--custom-track-color) !important;
+	scrollbar-width: var(--custom-width) !important;
 }
+
 /* Chrome and derivatives*/
 ::-webkit-scrollbar {
-    max-width: var(--custom-width) !important;
-    max-height: var(--webkit-scrollbar-heigth) !important;
-    background: var(--custom-track-color) !important;
+	max-width: var(--custom-width) !important;
+	max-height: var(--webkit-scrollbar-heigth) !important;
+	background: var(--custom-track-color) !important;
 }
+
 ::-webkit-scrollbar-corner,
 ::-webkit-scrollbar-track,
 ::-webkit-scrollbar-track-piece {
-    background: var(--custom-track-color) !important;
+	background: var(--custom-track-color) !important;
 }
+
 ::-webkit-scrollbar-thumb {
-    background: var(--custom-thumb-color) !important;
-    border-radius: var(--webkit-scrollbar-border-radius) !important;
+	background: var(--custom-thumb-color) !important;
+	border-radius: var(--webkit-scrollbar-border-radius) !important;
 }
+
 ::-webkit-scrollbar-corner:hover,
 ::-webkit-scrollbar-track:hover,
 ::-webkit-scrollbar-track-piece:hover {
-    background: var(--custom-track-color-hover) !important;
+	background: var(--custom-track-color-hover) !important;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--custom-thumb-color-hover) !important;
+	background: var(--custom-thumb-color-hover) !important;
 }
+
 @-moz-document regexp("^https?://(www\.)?instagram.com/+.*") {
-    div[role="presentation"] {
-        overflow-x: hidden;
-    }
+	div[role="presentation"] {
+		overflow-x: hidden;
+	}
 }
 
 @-moz-document regexp("^https?://(www\\.)?tweetdeck.twitter.com/+.*") {
-    *:not(select) {
-        scrollbar-color: unset!important;
-    }
-    ::-webkit-scrollbar {
+	*:not(select) {
+		scrollbar-color: unset!important;
+	}
 
-        background: unset !important;
-    }
-    ::-webkit-scrollbar-corner,
-    ::-webkit-scrollbar-track,
-    ::-webkit-scrollbar-track-piece {
-        background: unset !important;
-    }
-    ::-webkit-scrollbar-corner:hover,
-    ::-webkit-scrollbar-track:hover,
-    ::-webkit-scrollbar-track-piece:hover {
-        background: unset !important;
-    }
+	::-webkit-scrollbar {
+		background: unset !important;
+	}
+
+	::-webkit-scrollbar-corner,
+	::-webkit-scrollbar-track,
+	::-webkit-scrollbar-track-piece {
+		background: unset !important;
+	}
+
+	::-webkit-scrollbar-corner:hover,
+	::-webkit-scrollbar-track:hover,
+	::-webkit-scrollbar-track-piece:hover {
+		background: unset !important;
+	}
 }

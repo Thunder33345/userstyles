@@ -13,53 +13,53 @@
 @var checkbox disable-header "Disable the sticky header" 0
 ==/UserStyle== */
 @-moz-document domain("fandom.com") {
-    if disable-nav {
-        /*Disable left global navigator bar crap*/
-        .global-navigation {
-            display: none!important
-        }
+	if disable-nav {
+		/*Disable left global navigator bar crap*/
+		.global-navigation {
+			display: none!important
+		}
 
-        /*Reset margin and width since navigator is gone*/
-        .main-container {
-            margin-left: 0px;
-            width: auto
-        }
+		/*Reset margin and width since navigator is gone*/
+		.main-container {
+			margin-left: 0px;
+			width: auto
+		}
 
-        /*Header fix since navigator is gone*/
-        .fandom-sticky-header {
-            left: 0
-        }
-    }
+		/*Header fix since navigator is gone*/
+		.fandom-sticky-header {
+			left: 0
+		}
+	}
 
-    if disable-header {
-        /*Disables header*/
-        .fandom-sticky-header {
-            display: none!important
-        }
-    }
+	if disable-header {
+		/*Disables header*/
+		.fandom-sticky-header {
+			display: none!important
+		}
+	}
 
-    /*Tries to disable useless ads that take up space(best effort, use adblocker instead)*/
-    .ad-slot-placeholder {
-        display: none!important
-    }
+	/*Tries to disable useless ads that take up space(best effort, use adblocker instead)*/
+	.ad-slot-placeholder {
+		display: none!important
+	}
 
-    /*disable right "other pages" crap on the right of main content*/
-    .page__right-rail {
-        display: none!important
-    }
+	/*disable right "other pages" crap on the right of main content*/
+	.page__right-rail {
+		display: none!important
+	}
 
-    /*Disables "more [unrelated] content" crap at the end of page*/
-    .mcf-wrapper {
-        display: none!important
-    }
+	/*Disables "more [unrelated] content" crap at the end of page*/
+	.mcf-wrapper {
+		display: none!important
+	}
 
-    /*Remove the annoying floating bar at the bottom right*/
-    #WikiaBar {
-        display: none!important
-    }
+	/*Remove the annoying floating bar at the bottom right*/
+	#WikiaBar {
+		display: none!important
+	}
 
-    /*Remove pointless footer crap*/
-    .wds-global-footer {
-        display: none!important
-    }
+	/*Remove pointless footer crap*/
+	.wds-global-footer {
+		display: none!important
+	}
 }
