@@ -11,12 +11,13 @@
 @preprocessor stylus
 @var checkbox disable-nav "Disable the global navigator" 1 
 @var checkbox disable-header "Disable the sticky header" 0
+@var checkbox disable-footer "Disable the fandom footer" 0
 ==/UserStyle== */
 @-moz-document domain("fandom.com") {
 	if disable-nav {
 		/*Disable left global navigator bar crap*/
 		.global-navigation {
-			display: none!important
+			display: none
 		}
 
 		/*Reset margin and width since navigator is gone*/
@@ -34,32 +35,38 @@
 	if disable-header {
 		/*Disables header*/
 		.fandom-sticky-header {
-			display: none!important
+			display: none
 		}
 	}
 
-	/*Tries to disable useless ads that take up space(best effort, use adblocker instead)*/
+	/*Tries to disable useless ads that take up space(on best effort, use adblocker instead)*/
 	.ad-slot-placeholder {
-		display: none!important
+		display: none
 	}
 
-	/*disable right "other pages" crap on the right of main content*/
+	/*disable space hogger on the right of the main content, blocks: "Popular Pages" and "Others like you also viewed"*/
 	.page__right-rail {
-		display: none!important
-	}
-
-	/*Disables "more [unrelated] content" crap at the end of page*/
-	.mcf-wrapper {
-		display: none!important
+		display: none
 	}
 
 	/*Remove the annoying floating bar at the bottom right*/
 	#WikiaBar {
-		display: none!important
+		display: none
 	}
 
-	/*Remove pointless footer crap*/
-	.wds-global-footer {
-		display: none!important
+	/*Remove "Others like you also viewed" recommendation*/
+	.render-wiki-recommendations {
+		display: none
+	}
+
+	/*Disables "more [unrelated] content" crap at the end of page*/
+	.mcf-wrapper {
+		display: none
+	}
+	
+	if disable-footer {
+		.global-footer__content{
+			display: none
+		}
 	}
 }
