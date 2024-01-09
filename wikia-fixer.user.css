@@ -1,6 +1,6 @@
 /* ==UserStyle==
 @name           Wikia Fixer
-@version        0.0.2
+@version        0.0.3
 @description    Fixes ugly wikia
 @namespace      thunder/wikiafixer
 @author         Thunder
@@ -12,6 +12,7 @@
 @var checkbox disable-nav "Disable the global navigator" 1 
 @var checkbox disable-header "Disable the sticky header" 0
 @var checkbox disable-footer "Disable the fandom footer" 0
+@var checkbox disable-highlighter "Disable the fandom search highlighter" 1
 ==/UserStyle== */
 @-moz-document domain("fandom.com") {
 	if disable-nav {
@@ -39,6 +40,12 @@
 		}
 	}
 
+	if disable-highlighter {
+		#highlight__main-container{
+			display: none
+		}
+	}
+	
 	/*Tries to disable useless ads that take up space(on best effort, use adblocker instead)*/
 	.ad-slot-placeholder {
 		display: none
