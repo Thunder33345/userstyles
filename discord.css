@@ -1,0 +1,71 @@
+/* CSS Stylesheet for discord */
+
+/* I dont need stinking warning about what experiments is */
+#vc-experiments-warning-card {
+	display: none;
+}
+
+/* chat bar cleanup */
+div > div[aria-label="Send a personalized Nitro gift to spread holiday cheer!"],
+div > button[aria-label="Send a gift"] {
+	display: none;
+}
+
+div > div > button[aria-label="Open GIF picker"] {
+	display: none;
+}
+
+div > div > button[aria-label="Open sticker picker"] {
+	display: none;
+}
+
+/* category gap reduction  */
+:root {
+	--custom-category-channel-space-before-category: 2px;
+}
+
+/* cleanup user right click context */
+#user-context-call,
+#user-context-invite-to-server,
+#user-context-remove-friend,
+#user-context-add-friend {
+	display: none;
+}
+
+/* masked link hover warning */
+[class*="anchor_"][class*="anchorUnderlineOnHover_"][title$=")"]:hover {
+	color: indianred
+}
+
+/* Render masked links */
+/* [class*="anchor_"][title$=")"]::after {
+    font-size: 0.6rem;
+    content: " (" attr(href) ")";
+    filter: grayscale(0.4);
+    text-overflow: ellipsis;
+    max-width: 2px;
+} */
+/* remove CTA in thread list for empty threads */
+[class*="replies_"]:has([class*="startTheConversation_"]) {
+	display: none;
+}
+
+/* remove CTA in thread chat view for empty threads */
+ol[class*="scrollerInner_"][data-list-id="chat-messages"] [class*="box_"]:has([class*="animation_"]) {
+	display: none;
+}
+
+/* remove chat input nitro upsell nag for >2k msg */
+div[class*="characterCount_"] div[class*="upsell"] {
+	display: none;
+}
+
+/* remove subscribe button from upload text as file prompt */
+div[aria-label="Your message is too long..."][role="dialog"][class*=focusLock] button[class*=shinyButton] {
+	display: none;
+}
+
+/* remove activities prompt in voice channel */
+div[class*="row"]:has(div[class*=tile_] div[class*=outer_][class*=tileSizer_] div[class*=inner_] div[class*=root] img[alt="characters playing a game"]) {
+	display: none;
+}
