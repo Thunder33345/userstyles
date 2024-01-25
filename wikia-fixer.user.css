@@ -1,6 +1,6 @@
 /* ==UserStyle==
 @name           Wikia Fixer
-@version        0.0.3
+@version        0.0.4
 @description    Fixes ugly wikia
 @namespace      thunder/wikiafixer
 @author         Thunder
@@ -13,12 +13,14 @@
 @var checkbox disable-header "Disable the sticky header" 0
 @var checkbox disable-footer "Disable the fandom footer" 0
 @var checkbox disable-highlighter "Disable the fandom search highlighter" 1
+@var checkbox disable-right-rail "Disable the fandom right rail" 1
+@var checkbox disable-right-rail-junk "Disable the fandom right rail junk" 1
 ==/UserStyle== */
 @-moz-document domain("fandom.com") {
 	if disable-nav {
 		/*Disable left global navigator bar crap*/
 		.global-navigation {
-			display: none
+			display: none !important
 		}
 
 		/*Reset margin and width since navigator is gone*/
@@ -41,19 +43,32 @@
 	}
 
 	if disable-highlighter {
-		#highlight__main-container{
+		#highlight__main-container {
 			display: none
 		}
 	}
-	
+
 	/*Tries to disable useless ads that take up space(on best effort, use adblocker instead)*/
 	.ad-slot-placeholder {
 		display: none
 	}
 
-	/*disable space hogger on the right of the main content, blocks: "Popular Pages" and "Others like you also viewed"*/
-	.page__right-rail {
-		display: none
+	if disable-right-rail {
+		/*disable space hogger on the right of the main content, blocks: "Popular Pages" and "Others like you also viewed"*/
+		.page__right-rail {
+			display: none
+		}
+	}
+
+	if disable-right-rail-junk {
+		/*disables the recommendations on the rail*/
+		.page__right-rail .right-rail-wrapper .sticky-modules-wrapper {
+			display: none !important
+		}
+
+		.page__right-rail .right-rail-wrapper .render-wiki-recommendations-right-rail {
+			display: none !important
+		}
 	}
 
 	/*Remove the annoying floating bar at the bottom right*/
@@ -70,9 +85,9 @@
 	.mcf-wrapper {
 		display: none
 	}
-	
+
 	if disable-footer {
-		.global-footer__content{
+		.global-footer__content {
 			display: none
 		}
 	}
