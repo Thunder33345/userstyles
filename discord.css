@@ -62,10 +62,16 @@ ol[class*="scrollerInner_"][data-list-id="chat-messages"] [class*="box_"]:has([c
 	display: none;
 }
 
-/* remove chat input nitro upsell nag for >2k msg */
+/* remove minor nitro upsell nag at chat input for count nearing limit */
 div[class*="characterCount_"] div[class*="upsell"] {
 	display: none;
 }
+
+/* remove major nitro upsell nag at chat input for count over character limit */
+div[class*="characterCount_"] div[class*="messageLengthUpsellContainer"] {
+	display: none;
+}
+
 
 /* remove subscribe button from upload text as file prompt */
 div[aria-label="Your message is too long..."][role="dialog"][class*=focusLock] button[class*=shinyButton] {
