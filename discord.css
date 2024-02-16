@@ -68,7 +68,15 @@ div[class*="characterCount_"] div[class*="upsell"] {
 }
 
 /* remove major nitro upsell nag at chat input for count over character limit */
-div[class*="characterCount_"] div[class*="messageLengthUpsellContainer"] {
+div[class*="characterCount_"] div[class*="messageLengthBrandedContainer_"] {
+	display: none;
+}
+/* upsell divider  */
+div[class*="characterCount_"] div[class*="divider_"] {
+	display: none;
+}
+/* upsell button  */
+div[class*="characterCount_"] div[class*="messageLengthBrandedContainer_"]+button {
 	display: none;
 }
 
