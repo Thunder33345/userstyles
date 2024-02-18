@@ -71,18 +71,21 @@ div[class*="characterCount_"] div[class*="upsell"] {
 div[class*="characterCount_"] div[class*="messageLengthBrandedContainer_"] {
 	display: none;
 }
-/* upsell divider  */
+/* remove major nitro upsell nag: upsell divider  */
 div[class*="characterCount_"] div[class*="divider_"] {
 	display: none;
 }
-/* upsell button  */
+/* remove major nitro upsell nag: upsell button  */
 div[class*="characterCount_"] div[class*="messageLengthBrandedContainer_"]+button {
 	display: none;
 }
 
-
+/* remove green nitro cta button at upload as text prompt */
+div[aria-label="Your message is too long..."][role="dialog"][class*="focusLock_"] div[class*="content_"] div[class*=gradientUpsellWrapper_] {
+    display: none;
+}
 /* remove subscribe button from upload text as file prompt */
-div[aria-label="Your message is too long..."][role="dialog"][class*=focusLock] button[class*=shinyButton] {
+div[aria-label="Your message is too long..."][role="dialog"][class*=focusLock] div[class*=primaryActions_] button[class*=shinyButton]:has(div svg[class*=premiumIcon_]) {
 	display: none;
 }
 
