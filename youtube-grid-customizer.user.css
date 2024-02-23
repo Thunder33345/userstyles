@@ -1,0 +1,92 @@
+/* ==UserStyle==
+@name           Youtube Grid Customizer
+@namespace      github.com/thunder33345/youtube-grid
+@version        0.0.1
+@description    Customize items per row in youtube grids, including home, subscription and channel video
+@author         Thunder
+
+@homepageURL https://github.com/Thunder33345/userstyles
+@updateURL   https://github.com/Thunder33345/userstyles/raw/master/youtube-grid-customizer.user.css
+
+@preprocessor stylus
+@var number grid-per-row "Amount of videos per row" [5, 3, 10, 1]
+@var number grid-per-row-channel "Amount of videos per row for channels(buggy)" [0, 0, 10, 1]
+@var number grid-margin "Video grid holder horizontaL margin" [0.5, 0, 10, 0.05, "vw"]
+@var number item-bottom-margin "Video grid item bottom margin" [0.6, 0, 10, 0.05, "vh"]
+@var checkbox hide-home-shorts "Fix shorts gap(home): Check this to remove gap from hidden shorts" 1
+@var checkbox hide-sub-shorts "Fix shorts gap(subscription): Check this to remove gap from hidden shorts" 1
+Code originally from https://www.reddit.com/r/youtube/comments/125nbtz/how_to_change_number_of_videos_per_row_how_to/
+==/UserStyle== */
+@-moz-document url-prefix("https://www.youtube.com/feed/subscriptions"),
+url("https://www.youtube.com/") {
+	/* Home and subscription grid specific rules */
+	/* Fix grid display amount*/
+	.style-scope.ytd-rich-grid-renderer {
+		--ytd-rich-grid-items-per-row: grid-per-row;
+	}
+
+	/* Add some margin for subscription and home page */
+	#page-manager ytd-browse.style-scope.ytd-page-manager {
+		margin-left: grid-margin;
+		margin-right: grid-margin;
+	}
+}
+
+@-moz-document regexp("https://www.youtube.com/.*/videos") {
+	/* Channel grid specific rules */
+	if grid-per-row-channel > 0 {
+		.style-scope.ytd-rich-grid-renderer {
+			--ytd-rich-grid-items-per-row: grid-per-row-channel;
+		}
+
+		/* hack to fix joined items, enables only if using custom rows on channel page */
+		ytd-rich-item-renderer[is-slim-grid]:first-of-type {
+			margin-left: calc(var(--ytd-rich-grid-item-margin)/2)
+		}
+
+		ytd-rich-item-renderer[is-slim-grid]:last-of-type {
+			margin-right: calc(var(--ytd-rich-grid-item-margin)/2)
+		}
+	}
+}
+
+@-moz-document url-prefix("https://www.youtube.com/feed/subscriptions"),
+url("https://www.youtube.com/"),
+regexp("https://www.youtube.com/.*/videos") {
+	/* Shared rules */
+	#contents > ytd-rich-grid-row,
+	#contents > ytd-rich-grid-row > #contents {
+		display: contents;
+	}
+
+	/* Fix font sizes */
+	#video-title.ytd-rich-grid-media {
+		font-size: 1.3rem !important;
+	}
+
+	ytd-video-meta-block[rich-meta] #metadata-line.ytd-video-meta-block {
+		font-size: 1.2rem !important;
+	}
+
+	a.yt-simple-endpoint.yt-formatted-string {
+		font-size: 1.2rem !important;
+	}
+
+	ytd-rich-item-renderer {
+		margin-bottom: item-bottom-margin;
+	}
+
+	if hide-sub-shorts {
+		/* 	Hide shorts to fix shorts gap
+			adblocking the short section seems to leave a gap in CSS grid, so displaying none is needed */
+		#contents ytd-rich-section-renderer:has(div#content ytd-rich-shelf-renderer[is-shorts]) {
+			display: none;
+		}
+	}
+
+	if hide-home-shorts {
+		#contents ytd-rich-section-renderer:has(div#content ytd-counterfactual-renderer) {
+			display: none;
+		}
+	}
+}
