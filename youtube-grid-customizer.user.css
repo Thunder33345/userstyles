@@ -1,42 +1,94 @@
 /* ==UserStyle==
 @name           Youtube Grid Customizer
 @namespace      github.com/thunder33345/youtube-grid
-@version        0.0.1
-@description    Customize items per row in youtube grids, including home, subscription and channel video
+@version        0.0.2
+@description    Allow customizing videos per row in youtube video grids
 @author         Thunder
 
 @homepageURL https://github.com/Thunder33345/userstyles
 @updateURL   https://github.com/Thunder33345/userstyles/raw/master/youtube-grid-customizer.user.css
 
 @preprocessor stylus
-@var number grid-per-row "Amount of videos per row" [5, 3, 10, 1]
-@var number grid-per-row-channel "Amount of videos per row for channels(buggy)" [0, 0, 10, 1]
-@var number grid-margin "Video grid holder horizontaL margin" [0.5, 0, 10, 0.05, "vw"]
-@var number item-bottom-margin "Video grid item bottom margin" [0.6, 0, 10, 0.05, "vh"]
-@var checkbox hide-home-shorts "Fix shorts gap(home): Check this to remove gap from hidden shorts" 1
-@var checkbox hide-sub-shorts "Fix shorts gap(subscription): Check this to remove gap from hidden shorts" 1
+@var number grid-per-row-home "Home: Videos per row" [5, 0, 30, 1]
+@var checkbox hide-home-shorts "Home: Fix hidden shorts gap(hides shorts)" 1
+@var number grid-per-row-sub "Sub: Videos per row" [5, 0, 30, 1]
+@var checkbox hide-sub-shorts "Sub: Fix hidden shorts gap(hides shorts)" 1
+@var number grid-margin "Home&Sub: Grid side margin(vw)" [0.6, -1, 10, 0.01, "vw"]
+@var number grid-per-row-channel "Channel: Videos per row" [5, 0, 30, 1]
+@var number item-bottom-margin "All: Grid Video bottom margin(vh)" [0.65, -1, 10, 0.01, "vh"]
+@var number font-size-video-title "All: Grid video title size(rem)" [1.35, -1, 10, 0.01, "rem"]
+@var number font-size-video-channel "All: Grid video channel size(rem)" [1.2, -1, 10, 0.01, "rem"]
+@var number font-size-video-info "All: Grid video info size(rem)" [1.15, -1, 10, 0.01, "rem"]
+
 Code originally from https://www.reddit.com/r/youtube/comments/125nbtz/how_to_change_number_of_videos_per_row_how_to/
 ==/UserStyle== */
-@-moz-document url-prefix("https://www.youtube.com/feed/subscriptions"),
-url("https://www.youtube.com/") {
-	/* Home and subscription grid specific rules */
+@-moz-document url("https://www.youtube.com/") {
+	/* Home grid specific rules */
 	/* Fix grid display amount*/
-	.style-scope.ytd-rich-grid-renderer {
-		--ytd-rich-grid-items-per-row: grid-per-row;
+	if grid-per-row-home > 0 {
+		.style-scope.ytd-rich-grid-renderer {
+			--ytd-rich-grid-items-per-row: grid-per-row-home;
+		}
+
+		#contents > ytd-rich-grid-row,
+		#contents > ytd-rich-grid-row > #contents {
+			display: contents;
+		}
 	}
 
+	if hide-home-shorts {
+		#contents ytd-rich-section-renderer:has(div#content ytd-counterfactual-renderer) {
+			display: none;
+		}
+	}
+}
+
+@-moz-document url-prefix("https://www.youtube.com/feed/subscriptions") {
+	/* Subscription grid specific rules */
+	/* Fix grid display amount*/
+	if grid-per-row-sub > 0 {
+		.style-scope.ytd-rich-grid-renderer {
+			--ytd-rich-grid-items-per-row: grid-per-row-sub;
+		}
+
+		#contents > ytd-rich-grid-row,
+		#contents > ytd-rich-grid-row > #contents {
+			display: contents;
+		}
+	}
+
+	if hide-sub-shorts {
+		/* 	Hide shorts to fix shorts gap
+			adblocking the short section seems to leave a gap in CSS grid, so displaying none is needed */
+		#contents ytd-rich-section-renderer:has(div#content ytd-rich-shelf-renderer[is-shorts]) {
+			display: none;
+		}
+	}
+}
+
+@-moz-document url-prefix("https://www.youtube.com/feed/subscriptions"),
+url("https://www.youtube.com/") {
+	/* Shared rules */
 	/* Add some margin for subscription and home page */
-	#page-manager ytd-browse.style-scope.ytd-page-manager {
-		margin-left: grid-margin;
-		margin-right: grid-margin;
+	if grid-margin > -1 {
+		#page-manager ytd-browse.style-scope.ytd-page-manager {
+			margin-left: grid-margin;
+			margin-right: grid-margin;
+		}
 	}
 }
 
 @-moz-document regexp("https://www.youtube.com/.*/videos") {
 	/* Channel grid specific rules */
 	if grid-per-row-channel > 0 {
+		/* Fix grid display amount*/
 		.style-scope.ytd-rich-grid-renderer {
 			--ytd-rich-grid-items-per-row: grid-per-row-channel;
+		}
+
+		#contents > ytd-rich-grid-row,
+		#contents > ytd-rich-grid-row > #contents {
+			display: contents;
 		}
 
 		/* hack to fix joined items, enables only if using custom rows on channel page */
@@ -54,39 +106,31 @@ url("https://www.youtube.com/") {
 url("https://www.youtube.com/"),
 regexp("https://www.youtube.com/.*/videos") {
 	/* Shared rules */
-	#contents > ytd-rich-grid-row,
-	#contents > ytd-rich-grid-row > #contents {
-		display: contents;
-	}
-
-	/* Fix font sizes */
-	#video-title.ytd-rich-grid-media {
-		font-size: 1.3rem !important;
-	}
-
-	ytd-video-meta-block[rich-meta] #metadata-line.ytd-video-meta-block {
-		font-size: 1.2rem !important;
-	}
-
-	a.yt-simple-endpoint.yt-formatted-string {
-		font-size: 1.2rem !important;
-	}
-
-	ytd-rich-item-renderer {
-		margin-bottom: item-bottom-margin;
-	}
-
-	if hide-sub-shorts {
-		/* 	Hide shorts to fix shorts gap
-			adblocking the short section seems to leave a gap in CSS grid, so displaying none is needed */
-		#contents ytd-rich-section-renderer:has(div#content ytd-rich-shelf-renderer[is-shorts]) {
-			display: none;
+	/* Change font sizes */
+	if font-size-video-title > -1 {
+		/* Video Title */
+		#video-title.ytd-rich-grid-media {
+			font-size: font-size-video-title !important;
 		}
 	}
 
-	if hide-home-shorts {
-		#contents ytd-rich-section-renderer:has(div#content ytd-counterfactual-renderer) {
-			display: none;
+	if font-size-video-channel > -1 {
+		/* Video Channel */
+		a.yt-simple-endpoint.yt-formatted-string {
+			font-size: 1.2rem !important;
+		}
+	}
+
+	if font-size-video-info > -1 {
+		/* Video Info */
+		ytd-video-meta-block[rich-meta] #metadata-line.ytd-video-meta-block {
+			font-size: font-size-video-info !important;
+		}
+	}
+
+	if item-bottom-margin > -1 {
+		ytd-rich-item-renderer {
+			margin-bottom: item-bottom-margin;
 		}
 	}
 }
