@@ -93,3 +93,14 @@ div[aria-label="Your message is too long..."][role="dialog"][class*=focusLock] d
 div[class*="row"]:has(div[class*=tile_] div[class*=outer_][class*=tileSizer_] div[class*=inner_] div[class*=root] img[alt="characters playing a game"]) {
 	display: none;
 }
+
+/* hides home shop button */
+/* hotfix: couldnt hide the shop hover effect */
+ul[role="list"][aria-label="Direct Messages"] div[class*="interactive_"] a[href="/shop"] {
+    display: none
+}
+
+/* hides home shop new badge */
+/* a[href="/shop"] div[class*="textBadge_"] {
+    display: none
+} */
