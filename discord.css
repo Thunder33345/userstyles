@@ -104,3 +104,8 @@ ul[role="list"][aria-label="Direct Messages"] div[class*="interactive_"] a[href=
 /* a[href="/shop"] div[class*="textBadge_"] {
     display: none
 } */
+
+/* not so new: remove "new" badge on channels */
+#channels > ul  > li[class*="containerDefault_"] > div a[role=link] div[class^="children_"] > div[class^=channelInfo] > div[class^="newChannel_"] {
+ display: none !important;
+}
