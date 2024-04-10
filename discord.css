@@ -109,3 +109,8 @@ ul[role="list"][aria-label="Direct Messages"] div[class*="interactive_"] a[href=
 #channels > ul  > li[class*="containerDefault_"] > div a[role=link] div[class^="children_"] > div[class^=channelInfo] > div[class^="newChannel_"] {
  display: none !important;
 }
+
+/* who needs help?  */
+div[class*=toolbar_] a:has(div[aria-label="Help"]) {
+    display: none;
+}
