@@ -18,6 +18,7 @@ copyright 2024 Thunder
 @var number grid-margin "Home&Sub: Grid side margin(vw)" [0.6, -1, 10, 0.01, "vw"]
 @var number grid-per-row-channel "Channel: Videos per row" [5, 0, 30, 1]
 @var number grid-per-row-hashtag "Hashtag: Videos per row" [5, 0, 30, 1]
+@var number view-min-width "All: Required viewport width before grid options applies(px)" [900, 0, null, 1, "px"]
 @var number item-bottom-margin "All: Grid Video bottom margin(vh)" [0.65, -1, 10, 0.01, "vh"]
 @var number font-size-video-title "All: Grid video title size(rem)" [1.35, -1, 10, 0.01, "rem"]
 @var number font-size-video-channel "All: Grid video channel size(rem)" [1.2, -1, 10, 0.01, "rem"]
@@ -30,13 +31,15 @@ Code for font size originally from https://www.reddit.com/r/youtube/comments/141
 	/* Home grid specific rules */
 	/* Fix grid display amount*/
 	if grid-per-row-home > 0 {
-		.style-scope.ytd-rich-grid-renderer {
-			--ytd-rich-grid-items-per-row: grid-per-row-home;
-		}
+		@media (min-width: view-min-width) {
+			.style-scope.ytd-rich-grid-renderer {
+				--ytd-rich-grid-items-per-row: grid-per-row-home
+			}
 
-		#contents > ytd-rich-grid-row,
-		#contents > ytd-rich-grid-row > #contents {
-			display: contents;
+			#contents > ytd-rich-grid-row,
+			#contents > ytd-rich-grid-row > #contents {
+				display: contents
+			}
 		}
 	}
 
@@ -55,13 +58,15 @@ Code for font size originally from https://www.reddit.com/r/youtube/comments/141
 	/* Subscription grid specific rules */
 	/* Fix grid display amount*/
 	if grid-per-row-sub > 0 {
-		.style-scope.ytd-rich-grid-renderer {
-			--ytd-rich-grid-items-per-row: grid-per-row-sub;
-		}
+		@media (min-width: view-min-width) {
+			.style-scope.ytd-rich-grid-renderer {
+				--ytd-rich-grid-items-per-row: grid-per-row-sub;
+			}
 
-		#contents > ytd-rich-grid-row,
-		#contents > ytd-rich-grid-row > #contents {
-			display: contents;
+			#contents > ytd-rich-grid-row,
+			#contents > ytd-rich-grid-row > #contents {
+				display: contents;
+			}
 		}
 	}
 
@@ -92,13 +97,15 @@ url("https://www.youtube.com/") {
 	/* Hashtag page specific rules */
 	/* Fix grid display amount*/
 	if grid-per-row-hashtag > 0 {
-		.style-scope.ytd-rich-grid-renderer {
-			--ytd-rich-grid-items-per-row: grid-per-row-home;
-		}
+		@media (min-width: view-min-width) {
+			.style-scope.ytd-rich-grid-renderer {
+				--ytd-rich-grid-items-per-row: grid-per-row-home;
+			}
 
-		#contents > ytd-rich-grid-row,
-		#contents > ytd-rich-grid-row > #contents {
-			display: contents;
+			#contents > ytd-rich-grid-row,
+			#contents > ytd-rich-grid-row > #contents {
+				display: contents;
+			}
 		}
 	}
 }
@@ -107,22 +114,24 @@ url("https://www.youtube.com/") {
 	/* Channel grid specific rules */
 	if grid-per-row-channel > 0 {
 		/* Fix grid display amount*/
-		.style-scope.ytd-rich-grid-renderer {
-			--ytd-rich-grid-items-per-row: grid-per-row-channel;
-		}
+		@media (min-width: view-min-width) {
+			.style-scope.ytd-rich-grid-renderer {
+				--ytd-rich-grid-items-per-row: grid-per-row-channel;
+			}
 
-		#contents > ytd-rich-grid-row,
-		#contents > ytd-rich-grid-row > #contents {
-			display: contents;
-		}
+			#contents > ytd-rich-grid-row,
+			#contents > ytd-rich-grid-row > #contents {
+				display: contents;
+			}
 
-		/* hack to fix joined items, enables only if using custom rows on channel page */
-		ytd-rich-item-renderer[is-slim-grid]:first-of-type {
-			margin-left: calc(var(--ytd-rich-grid-item-margin)/2)
-		}
+			/* hack to fix joined items, enables only if using custom rows on channel page */
+			ytd-rich-item-renderer[is-slim-grid]:first-of-type {
+				margin-left: calc(var(--ytd-rich-grid-item-margin)/2)
+			}
 
-		ytd-rich-item-renderer[is-slim-grid]:last-of-type {
-			margin-right: calc(var(--ytd-rich-grid-item-margin)/2)
+			ytd-rich-item-renderer[is-slim-grid]:last-of-type {
+				margin-right: calc(var(--ytd-rich-grid-item-margin)/2)
+			}
 		}
 	}
 }
