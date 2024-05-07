@@ -1,9 +1,11 @@
 /* ==UserStyle==
 @name           Wikia Fixer
-@version        0.0.4
-@description    Fixes ugly wikia
-@namespace      thunder/wikiafixer
+@namespace      github.com/thunder33345/wikiafixer
+@version        0.0.5
+@description    Fixes ugly wikia/fandom. Options included.
 @author         Thunder
+@license        BSD-2-Clause
+copyright 2021 Thunder
 
 @homepageURL https://github.com/Thunder33345/userstyles
 @updateURL   https://github.com/Thunder33345/userstyles/raw/master/wikia-fixer.user.css
@@ -49,7 +51,8 @@
 	}
 
 	/*Tries to disable useless ads that take up space(on best effort, use adblocker instead)*/
-	.ad-slot-placeholder {
+	.ad-slot-placeholder,
+	.bottom-ads-container {
 		display: none
 	}
 
@@ -82,8 +85,18 @@
 	}
 
 	/*Disables "more [unrelated] content" crap at the end of page*/
-	.mcf-wrapper {
+	#mixed-content-footer {
 		display: none
+	}
+
+	/* Mobile: Disable junk recommendation at the bottom */
+	.recirculation-prefooter {
+		display: none
+	}
+
+	/* Disable obstructive age gate */
+	#age-gate {
+		display: none !important
 	}
 
 	if disable-footer {
