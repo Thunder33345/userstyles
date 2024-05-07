@@ -29,9 +29,9 @@ Code for font size originally from https://www.reddit.com/r/youtube/comments/141
 ==/UserStyle== */
 @-moz-document url("https://www.youtube.com/") {
 	/* Home grid specific rules */
-	/* Fix grid display amount*/
 	if grid-per-row-home > 0 {
 		@media (min-width: view-min-width) {
+			/* Fix grid display amount*/
 			.style-scope.ytd-rich-grid-renderer {
 				--ytd-rich-grid-items-per-row: grid-per-row-home
 			}
@@ -56,9 +56,9 @@ Code for font size originally from https://www.reddit.com/r/youtube/comments/141
 
 @-moz-document url-prefix("https://www.youtube.com/feed/subscriptions") {
 	/* Subscription grid specific rules */
-	/* Fix grid display amount*/
 	if grid-per-row-sub > 0 {
 		@media (min-width: view-min-width) {
+			/* Fix grid display amount*/
 			.style-scope.ytd-rich-grid-renderer {
 				--ytd-rich-grid-items-per-row: grid-per-row-sub;
 			}
@@ -95,9 +95,9 @@ url("https://www.youtube.com/") {
 
 @-moz-document url-prefix("https://www.youtube.com/hashtag") {
 	/* Hashtag page specific rules */
-	/* Fix grid display amount*/
 	if grid-per-row-hashtag > 0 {
 		@media (min-width: view-min-width) {
+			/* Fix grid display amount*/
 			.style-scope.ytd-rich-grid-renderer {
 				--ytd-rich-grid-items-per-row: grid-per-row-home;
 			}
@@ -113,8 +113,8 @@ url("https://www.youtube.com/") {
 @-moz-document regexp("https://www.youtube.com/.*/videos") {
 	/* Channel grid specific rules */
 	if grid-per-row-channel > 0 {
-		/* Fix grid display amount*/
 		@media (min-width: view-min-width) {
+			/* Fix grid display amount*/
 			.style-scope.ytd-rich-grid-renderer {
 				--ytd-rich-grid-items-per-row: grid-per-row-channel;
 			}
