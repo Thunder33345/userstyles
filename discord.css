@@ -105,6 +105,12 @@ ul[role="list"][aria-label="Direct Messages"] div[class*="interactive_"] a[href=
     display: none
 } */
 
+/* hides home nitro button */
+/* hotfix: too lazy to remove the "new features" nag popups so just nuke the whole thing instead*/
+ul[role="list"][aria-label="Direct Messages"] div[class*="interactive_"] a[href="/store"] {
+    display: none
+}
+
 /* not so new: remove "new" badge on channels */
 #channels > ul  > li[class*="containerDefault_"] > div a[role=link] div[class^="children_"] > div[class^=channelInfo] > div[class^="newChannel_"] {
  display: none !important;
@@ -113,4 +119,11 @@ ul[role="list"][aria-label="Direct Messages"] div[class*="interactive_"] a[href=
 /* who needs help?  */
 div[class*=toolbar_] a:has(div[aria-label="Help"]) {
     display: none;
+}
+
+/* unbold bot/system/webhook/clan tags */
+/* no need to shove it in my face */
+span[class^=botText], span[class^=unselectable] {
+  font-size: unset !important;
+  font-weight: 500 !important;
 }
