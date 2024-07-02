@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Youtube Grid Customizer
 @namespace      github.com/thunder33345/youtube-grid
-@version        0.0.4
+@version        0.0.5
 @description    Allow customizing videos per row in youtube video grids
 @author         Thunder
 @license        BSD-2-Clause
@@ -15,14 +15,22 @@ copyright 2024 Thunder
 @var checkbox hide-home-shorts "Home: Fix hidden shorts gap(hides shorts)" 1
 @var number grid-per-row-sub "Sub: Videos per row" [5, 0, 30, 1]
 @var checkbox hide-sub-shorts "Sub: Fix hidden shorts gap(hides shorts)" 1
+
 @var number grid-margin "Home&Sub: Grid side margin(vw)" [0.6, -1, 10, 0.01, "vw"]
+
 @var number grid-per-row-channel "Channel: Videos per row" [5, 0, 30, 1]
+
 @var number grid-per-row-hashtag "Hashtag: Videos per row" [5, 0, 30, 1]
+
 @var number view-min-width "All: Required viewport width before grid options applies(px)" [900, 0, null, 1, "px"]
 @var number item-bottom-margin "All: Grid Video bottom margin(vh)" [0.65, -1, 10, 0.01, "vh"]
 @var number font-size-video-title "All: Grid video title size(rem)" [1.35, -1, 10, 0.01, "rem"]
 @var number font-size-video-channel "All: Grid video channel size(rem)" [1.2, -1, 10, 0.01, "rem"]
 @var number font-size-video-info "All: Grid video info size(rem)" [1.15, -1, 10, 0.01, "rem"]
+
+@var checkbox search-revert-big-mode "Search: Fix large thumbnail in search" 1
+@var number search-thumbnail-max "Search: Thumbnail max width" [260,0,"px"]
+@var number search-thumbnail-min "Search: Thumbnail min width" [240,0,"px"]
 
 Code for grids originally from https://www.reddit.com/r/youtube/comments/125nbtz/how_to_change_number_of_videos_per_row_how_to/
 Code for font size originally from https://www.reddit.com/r/youtube/comments/141ts0q/comment/jnej6z8/
@@ -170,4 +178,13 @@ url-prefix("https://www.youtube.com/hashtag") {
 	}
 
 	/* Wont fix: skeleton loaders are not correctly styled */
+}
+
+@-moz-document url-prefix("https://www.youtube.com/results?search_query") {
+	if search-revert-big-mode {
+		ytd-video-renderer[use-search-ui] ytd-thumbnail.ytd-video-renderer {
+			max-width: search-thumbnail-max !important;
+			min-width: search-thumbnail-min !important;
+		}
+	}
 }
