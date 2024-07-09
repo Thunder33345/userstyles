@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Youtube Grid Customizer
 @namespace      github.com/thunder33345/youtube-grid
-@version        0.0.5
+@version        0.0.6
 @description    Allow customizing videos per row in youtube video grids
 @author         Thunder
 @license        BSD-2-Clause
@@ -47,6 +47,11 @@ Code for font size originally from https://www.reddit.com/r/youtube/comments/141
 			#contents > ytd-rich-grid-row,
 			#contents > ytd-rich-grid-row > #contents {
 				display: contents
+			}
+
+			.ghost-grid.ytd-ghost-grid-renderer {
+				width: calc(var(--ytd-rich-grid-content-max-width) + var(--ytd-rich-grid-item-margin));
+				margin: 0 0px;
 			}
 		}
 	}
@@ -176,8 +181,6 @@ url-prefix("https://www.youtube.com/hashtag") {
 			margin-bottom: item-bottom-margin;
 		}
 	}
-
-	/* Wont fix: skeleton loaders are not correctly styled */
 }
 
 @-moz-document url-prefix("https://www.youtube.com/results?search_query") {
