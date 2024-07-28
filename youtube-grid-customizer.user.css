@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Youtube Grid Customizer
 @namespace      github.com/thunder33345/youtube-grid
-@version        0.0.6
+@version        0.0.7
 @description    Allow customizing videos per row in youtube video grids
 @author         Thunder
 @license        BSD-2-Clause
@@ -27,6 +27,7 @@ copyright 2024 Thunder
 @var number font-size-video-title "All: Grid video title size(rem)" [1.35, -1, 10, 0.01, "rem"]
 @var number font-size-video-channel "All: Grid video channel size(rem)" [1.2, -1, 10, 0.01, "rem"]
 @var number font-size-video-info "All: Grid video info size(rem)" [1.15, -1, 10, 0.01, "rem"]
+@var number item-thumbnail-round "All: Grid thumbnail roundness(px)" [12, -1, 100, 0.01, "px"]
 
 @var checkbox search-revert-big-mode "Search: Fix large thumbnail in search" 1
 @var number search-thumbnail-max "Search: Thumbnail max width" [260,0,"px"]
@@ -79,6 +80,11 @@ Code for font size originally from https://www.reddit.com/r/youtube/comments/141
 			#contents > ytd-rich-grid-row,
 			#contents > ytd-rich-grid-row > #contents {
 				display: contents;
+			}
+
+			.ghost-grid.ytd-ghost-grid-renderer {
+				width: calc(var(--ytd-rich-grid-content-max-width) + var(--ytd-rich-grid-item-margin));
+				margin: 0 0px;
 			}
 		}
 	}
@@ -149,11 +155,13 @@ url("https://www.youtube.com/") {
 	}
 }
 
-@-moz-document url-prefix("https://www.youtube.com/feed/subscriptions"),
-url("https://www.youtube.com/"),
-regexp("https://www.youtube.com/.*/videos"),
-url-prefix("https://www.youtube.com/hashtag") {
+@-moz-document url-prefix("https://www.youtube.com/") {
 	/* Shared rules */
+	/* TEMP: try matching whole site	 */
+	/* 	url-prefix("https://www.youtube.com/feed/subscriptions"), */
+	/* 	url("https://www.youtube.com/"), */
+	/* 	regexp("https://www.youtube.com/.* /videos"), */
+	/* 	url-prefix("https://www.youtube.com/hashtag")  */
 	/* Change font sizes */
 	if font-size-video-title > -1 {
 		/* Video Title */
@@ -179,6 +187,14 @@ url-prefix("https://www.youtube.com/hashtag") {
 	if item-bottom-margin > -1 {
 		ytd-rich-item-renderer {
 			margin-bottom: item-bottom-margin;
+		}
+	}
+
+	if item-thumbnail-round > -1 {
+		/* Thumbnail roundness */
+		ytd-thumbnail[size] a.ytd-thumbnail,
+		ytd-thumbnail[size]:before {
+			border-radius: item-thumbnail-round !important;
 		}
 	}
 }
