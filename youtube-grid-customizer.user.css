@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Youtube Grid Customizer
 @namespace      github.com/thunder33345/youtube-grid
-@version        0.0.7
+@version        0.0.8
 @description    Allow customizing videos per row in youtube video grids
 @author         Thunder
 @license        BSD-2-Clause
@@ -22,16 +22,16 @@ copyright 2024 Thunder
 
 @var number grid-per-row-hashtag "Hashtag: Videos per row" [5, 0, 30, 1]
 
+@var checkbox search-revert-big-mode "Search: Fix large thumbnail in search" 1
+@var number search-thumbnail-max "Search: Thumbnail max width" [260,0,"px"]
+@var number search-thumbnail-min "Search: Thumbnail min width" [240,0,"px"]
+
 @var number view-min-width "All: Required viewport width before grid options applies(px)" [900, 0, null, 1, "px"]
 @var number item-bottom-margin "All: Grid Video bottom margin(vh)" [0.65, -1, 10, 0.01, "vh"]
 @var number font-size-video-title "All: Grid video title size(rem)" [1.35, -1, 10, 0.01, "rem"]
 @var number font-size-video-channel "All: Grid video channel size(rem)" [1.2, -1, 10, 0.01, "rem"]
 @var number font-size-video-info "All: Grid video info size(rem)" [1.15, -1, 10, 0.01, "rem"]
 @var number item-thumbnail-round "All: Grid thumbnail roundness(px)" [12, -1, 100, 0.01, "px"]
-
-@var checkbox search-revert-big-mode "Search: Fix large thumbnail in search" 1
-@var number search-thumbnail-max "Search: Thumbnail max width" [260,0,"px"]
-@var number search-thumbnail-min "Search: Thumbnail min width" [240,0,"px"]
 
 Code for grids originally from https://www.reddit.com/r/youtube/comments/125nbtz/how_to_change_number_of_videos_per_row_how_to/
 Code for font size originally from https://www.reddit.com/r/youtube/comments/141ts0q/comment/jnej6z8/
@@ -155,13 +155,21 @@ url("https://www.youtube.com/") {
 	}
 }
 
-@-moz-document url-prefix("https://www.youtube.com/") {
+@-moz-document url-prefix("https://www.youtube.com/results?search_query") {
+	/* Search rules */
+	if search-revert-big-mode {
+		ytd-video-renderer[use-search-ui] ytd-thumbnail.ytd-video-renderer {
+			max-width: search-thumbnail-max !important;
+			min-width: search-thumbnail-min !important;
+		}
+	}
+}
+
+@-moz-document url-prefix("https://www.youtube.com/feed/subscriptions"),
+url("https://www.youtube.com/"),
+regexp("https://www.youtube.com/.*/videos"),
+url-prefix("https://www.youtube.com/hashtag") {
 	/* Shared rules */
-	/* TEMP: try matching whole site	 */
-	/* 	url-prefix("https://www.youtube.com/feed/subscriptions"), */
-	/* 	url("https://www.youtube.com/"), */
-	/* 	regexp("https://www.youtube.com/.* /videos"), */
-	/* 	url-prefix("https://www.youtube.com/hashtag")  */
 	/* Change font sizes */
 	if font-size-video-title > -1 {
 		/* Video Title */
@@ -173,7 +181,7 @@ url("https://www.youtube.com/") {
 	if font-size-video-channel > -1 {
 		/* Video Channel */
 		a.yt-simple-endpoint.yt-formatted-string {
-			font-size: 1.2rem !important;
+			font-size: font-size-video-channel !important;
 		}
 	}
 
@@ -189,21 +197,15 @@ url("https://www.youtube.com/") {
 			margin-bottom: item-bottom-margin;
 		}
 	}
+}
 
+@-moz-document url-prefix("https://www.youtube.com") {
+	/* Global rules */
 	if item-thumbnail-round > -1 {
 		/* Thumbnail roundness */
 		ytd-thumbnail[size] a.ytd-thumbnail,
 		ytd-thumbnail[size]:before {
 			border-radius: item-thumbnail-round !important;
-		}
-	}
-}
-
-@-moz-document url-prefix("https://www.youtube.com/results?search_query") {
-	if search-revert-big-mode {
-		ytd-video-renderer[use-search-ui] ytd-thumbnail.ytd-video-renderer {
-			max-width: search-thumbnail-max !important;
-			min-width: search-thumbnail-min !important;
 		}
 	}
 }
