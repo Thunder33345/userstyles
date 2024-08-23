@@ -127,3 +127,10 @@ span[class^=botText], span[class^=unselectable] {
   font-size: unset !important;
   font-weight: 500 !important;
 }
+
+/* stop plastering my activities palette with ads */
+section[class*="positionContainer_"][aria-label="Application Launcher"][role="dialog"] > 
+[class*="drawerSizingWrapper_"] > [class*="contentWrapper_"] 
+[class*="container_"] > [class*="scrollableContent_"] > div > div:nth-child(n+3) {
+    display: none
+}
