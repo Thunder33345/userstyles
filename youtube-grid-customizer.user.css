@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Youtube Grid Customizer
 @namespace      github.com/thunder33345/youtube-grid
-@version        0.0.8
+@version        0.0.9
 @description    Allow customizing videos per row in youtube video grids
 @author         Thunder
 @license        BSD-2-Clause
@@ -16,7 +16,8 @@ copyright 2024 Thunder
 @var number grid-per-row-sub "Sub: Videos per row" [5, 0, 30, 1]
 @var checkbox hide-sub-shorts "Sub: Fix hidden shorts gap(hides shorts)" 1
 
-@var number grid-margin "Home&Sub: Grid side margin(vw)" [0.6, -1, 10, 0.01, "vw"]
+@var number grid-side-margin "Home&Sub: Grid window side margin(vw)" [0.85, -1, 10, 0.01, "vw"]
+@var number grid-item-margin "Home&Sub: Grid item side margin(vw)" [-1, -1, 10, 0.01, "vw"]
 
 @var number grid-per-row-channel "Channel: Videos per row" [5, 0, 30, 1]
 
@@ -77,6 +78,12 @@ Code for font size originally from https://www.reddit.com/r/youtube/comments/141
 				--ytd-rich-grid-items-per-row: grid-per-row-sub;
 			}
 
+			if grid-item-margin > -1 {
+				.style-scope.ytd-rich-grid-renderer {
+					--ytd-rich-grid-item-margin: grid-item-margin;
+				}
+			}
+
 			#contents > ytd-rich-grid-row,
 			#contents > ytd-rich-grid-row > #contents {
 				display: contents;
@@ -85,6 +92,19 @@ Code for font size originally from https://www.reddit.com/r/youtube/comments/141
 			.ghost-grid.ytd-ghost-grid-renderer {
 				width: calc(var(--ytd-rich-grid-content-max-width) + var(--ytd-rich-grid-item-margin));
 				margin: 0 0px;
+			}
+
+			
+			/* fix items not occupying full row, leaving empty space on the right */
+			#contents > ytd-rich-item-renderer[rendered-from-rich-grid] {
+				--ytd-rich-item-row-usable-width: calc(100%);
+				/* make width exclude item margin, since we dont use extra item margin we need to take up the slack */
+				width: calc(var(--ytd-rich-item-row-usable-width)/var(--ytd-rich-grid-items-per-row) - var(--ytd-rich-grid-item-margin) - .01px);
+			}
+
+			/* fix issue where grid doesnt line up because we changed the "first" item in column */
+			#contents > ytd-rich-item-renderer[rendered-from-rich-grid][is-in-first-column] {
+				margin-left: calc(var(--ytd-rich-grid-item-margin)/2);
 			}
 		}
 	}
@@ -102,10 +122,10 @@ Code for font size originally from https://www.reddit.com/r/youtube/comments/141
 url("https://www.youtube.com/") {
 	/* Home and Subcription shared rules */
 	/* Add some margin for subscription and home page */
-	if grid-margin > -1 {
+	if grid-side-margin > -1 {
 		#page-manager ytd-browse.style-scope.ytd-page-manager {
-			margin-left: grid-margin;
-			margin-right: grid-margin;
+			margin-left: grid-side-margin;
+			margin-right: grid-side-margin;
 		}
 	}
 
