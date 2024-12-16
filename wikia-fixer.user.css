@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Wikia Fixer
 @namespace      github.com/thunder33345/wikiafixer
-@version        0.0.5
+@version        0.0.6
 @description    Fixes ugly wikia/fandom. Options included.
 @author         Thunder
 @license        BSD-2-Clause
@@ -17,6 +17,7 @@ copyright 2021 Thunder
 @var checkbox disable-highlighter "Disable the fandom search highlighter" 1
 @var checkbox disable-right-rail "Disable the fandom right rail" 1
 @var checkbox disable-right-rail-junk "Disable the fandom right rail junk" 1
+@var checkbox disable-right-rail-junk-search "Disable the fandom right rail junk in search" 1
 ==/UserStyle== */
 @-moz-document domain("fandom.com") {
 	if disable-nav {
@@ -25,11 +26,25 @@ copyright 2021 Thunder
 			display: none !important
 		}
 
+		.global-explore-navigation {
+			display: none !important
+		}
+
+		.global-top-navigation {
+			display: none !important
+		}
+
 		/*Reset margin and width since navigator is gone*/
 		.main-container {
 			margin-left: 0px;
 			width: auto
 		}
+
+		/* Reset banner height */
+		.main-container > div.fandom-community-header__background.cover.header {
+			transform: unset
+		}
+
 
 		/*Header fix since navigator is gone*/
 		.fandom-sticky-header {
@@ -71,6 +86,12 @@ copyright 2021 Thunder
 
 		.page__right-rail .right-rail-wrapper .render-wiki-recommendations-right-rail {
 			display: none !important
+		}
+	}
+
+	if disable-right-rail-junk-search {
+		.unified-search__layout > .unified-search__layout__right-rail {
+			display: none
 		}
 	}
 
