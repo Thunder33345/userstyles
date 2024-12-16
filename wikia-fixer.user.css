@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Wikia Fixer
 @namespace      github.com/thunder33345/wikiafixer
-@version        0.0.6
+@version        0.0.7
 @description    Fixes ugly wikia/fandom. Options included.
 @author         Thunder
 @license        BSD-2-Clause
@@ -45,10 +45,14 @@ copyright 2021 Thunder
 			transform: unset
 		}
 
-
 		/*Header fix since navigator is gone*/
 		.fandom-sticky-header {
 			left: 0
+		}
+
+		/* Fix mainpage gap https://www.fandom.com who even looks at this anyways*/
+		body.f2-page:not(.article-editor-body):not(.no-global-nav) {
+			margin-left: auto;
 		}
 	}
 
@@ -124,5 +128,21 @@ copyright 2021 Thunder
 		.global-footer__content {
 			display: none
 		}
+	}
+
+	/* MOBILE SECTION */
+	/* annoying bottom banner */
+	div.wds-mobile-drawer {
+		display: none !important
+	}
+
+	/* gunk on my search box */
+	.mobile-search-modal > .mobile-search-modal__content > .mobile-search-modal__links {
+		display: none !important
+	}
+
+	/* more fandom crap at footer */
+	.page-footer__trfc-147 {
+		display: none !important
 	}
 }
