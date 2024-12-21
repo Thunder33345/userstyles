@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Youtube Grid Customizer
 @namespace      github.com/thunder33345/youtube-grid
-@version        0.0.9
+@version        0.0.10
 @description    Allow customizing videos per row in youtube video grids
 @author         Thunder
 @license        BSD-2-Clause
@@ -94,7 +94,6 @@ Code for font size originally from https://www.reddit.com/r/youtube/comments/141
 				margin: 0 0px;
 			}
 
-			
 			/* fix items not occupying full row, leaving empty space on the right */
 			#contents > ytd-rich-item-renderer[rendered-from-rich-grid] {
 				--ytd-rich-item-row-usable-width: calc(100%);
@@ -179,6 +178,12 @@ url("https://www.youtube.com/") {
 	/* Search rules */
 	if search-revert-big-mode {
 		ytd-video-renderer[use-search-ui] ytd-thumbnail.ytd-video-renderer {
+			max-width: search-thumbnail-max !important;
+			min-width: search-thumbnail-min !important;
+		}
+		
+		/* Fix stacked video collection size */
+		yt-lockup-view-model.ytd-item-section-renderer.lockup > div > div.yt-lockup-view-model-wiz__content-image {
 			max-width: search-thumbnail-max !important;
 			min-width: search-thumbnail-min !important;
 		}
