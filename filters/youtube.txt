@@ -1,11 +1,13 @@
 ! Title: Thunder's filters – Youtube Cleanup
 
 ! Youtube cleanup
+
 ! Annotations revived
 youtube.com#@#.video-annotations
 youtube.com#@#.ytp-ce-covering-overlay
 youtube.com#@#.ytp-ce-element
 youtube.com#@#.ytp-ce-playlist
+
 ! Shorts be gone, keyword filter
 ! www.youtube.com##ytd-grid-video-renderer.ytd-grid-renderer.style-scope:has-text(/#shorts/i)
 !www.youtube.com##ytd-rich-item-renderer.ytd-rich-grid-renderer.style-scope:has-text(/#shorts/i) !bad
@@ -19,15 +21,19 @@ youtube.com#@#.ytp-ce-playlist
 youtube.com##ytd-rich-item-renderer:has(div#overlays > ytd-thumbnail-overlay-time-status-renderer > span:has-text(/shorts/i))
 ! anti shorts on homepage 
 www.youtube.com###title-text > .ytd-rich-shelf-renderer.style-scope:has-text("Shorts"):upward(8)
+! anti shorts on subscription
+www.youtube.com###content.style-scope.ytd-rich-section-renderer > ytd-rich-shelf-renderer[is-shorts]
 !youtube.com##ytd-thumbnail-overlay-time-status-renderer[overlay-style="SHORTS"]:upward(5)
+! shorts
+www.youtube.com##ytd-reel-shelf-renderer.ytd-item-section-renderer.style-scope
+
 ! short durationed videos, 0min vid
 ! www.youtube.com##.ytd-thumbnail-overlay-time-status-renderer.style-scope:has-text(/\D0:\d\d\s/):upward(6)
 ! short durationed videos, 1m-[0,1,2,3]Xs, make sure to ignore 01h:01m:XXs
 !www.youtube.com##.ytd-thumbnail-overlay-time-status-renderer.style-scope:has-text(/\D1:[0123]\d\s/):upward(6)
-! I know what's a scroll wheel
-www.youtube.com##.ytp-fullerscreen-edu-text
+
+!# sidepanel
 ! No gunk in my sidepanel
-www.youtube.com##ytd-guide-entry-renderer.ytd-guide-section-renderer.style-scope > .ytd-guide-entry-renderer.style-scope.yt-simple-endpoint:has-text(/Explore/i)
 www.youtube.com##ytd-guide-entry-renderer.ytd-guide-section-renderer.style-scope > .ytd-guide-entry-renderer.style-scope.yt-simple-endpoint:has-text(/Shorts/i)
 www.youtube.com##ytd-guide-section-renderer.ytd-guide-renderer.style-scope:has-text(/Explore/i)
 www.youtube.com##ytd-guide-section-renderer.ytd-guide-renderer.style-scope:has-text(/More from YouTube/i)
@@ -35,11 +41,19 @@ www.youtube.com##ytd-guide-section-renderer.ytd-guide-renderer.style-scope:has-t
 www.youtube.com###country-code
 ! hide some junk caused by idk what plugin
 www.youtube.com##.ysm-order-button.ytd-grid-video-renderer.style-scope > .ytd-menu-renderer.style-scope.dropdown-trigger
+
+!# Player
+! I know what's a scroll wheel
+www.youtube.com##.ytp-fullerscreen-edu-text
 ! hide view products banner that hovers above player
 www.youtube.com##.ytp-suggested-action-badge-expanded.ytp-suggested-action-badge-with-controls
+
+!# Player Accessory
 ! Details bar declutter, remove useless clip
 !www.youtube.com##ytd-button-renderer.size-default.style-default.force-icon-button.ytd-menu-renderer.style-scope:has-text(/clip/i)
 www.youtube.com##yt-button-view-model.ytd-menu-renderer.style-scope:has-text(/clip/i)
+! remove thanks
+www.youtube.com##.yt-spec-button-view-model:has-text(/Thanks/i)
 ! hide fundraiser
 www.youtube.com###video-badges:has-text(/fundraiser/i)
 ! hide suggesting on buying products
@@ -51,8 +65,21 @@ www.youtube.com##ytd-button-renderer.ytd-menu-renderer.style-scope:has(yt-button
 ! remove fake useless download button
 ! www.youtube.com##ytd-download-button-renderer.ytd-menu-renderer.style-scope
 www.youtube.com##.ytd-download-button-renderer.style-scope
-! try disabling animations fail
+! improved tube cleanup
+www.youtube.com##button.improvedtube-player-button
+
+! remove bullshit from video dropdown menu 24/10
+www.youtube.com##tp-yt-paper-listbox#items > ytd-menu-service-item-download-renderer
+www.youtube.com##tp-yt-paper-listbox#items > ytd-menu-service-item-renderer:has(yt-formatted-string:has-text("Thanks"))
+www.youtube.com##tp-yt-paper-listbox#items > ytd-menu-service-item-renderer:has(yt-formatted-string:has-text("Clip"))
+
+! No useless shit i cannot view in home 24/12
+! removes "member only" videos
+www.youtube.com###contents > ytd-rich-item-renderer.ytd-rich-grid-renderer.style-scope:has(#meta> ytd-badge-supported-renderer.video-badge>.badge.badge-style-type-members-only>.style-scope.ytd-badge-supported-renderer:has-text(/Members only/))
+
+! try disabling animations failed
 ! www.youtube.com##+js(set-attr, yt-animated-rolling-number, should-animate, false)
 
+! Failed at hiding accent highlight animations images
 ! ||www.gstatic.com/external_hosted/lottie/lottie_light.js$script,domain=www.youtube.com
 ! ||https://www.youtube.com/youtubei/v1/updated_metadata*$domain=www.youtube.com
