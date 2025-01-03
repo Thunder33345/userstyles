@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Youtube Grid Customizer
 @namespace      github.com/thunder33345/youtube-grid
-@version        0.0.10
+@version        0.0.111
 @description    Allow customizing videos per row in youtube video grids
 @author         Thunder
 @license        BSD-2-Clause
@@ -177,13 +177,25 @@ url("https://www.youtube.com/") {
 @-moz-document url-prefix("https://www.youtube.com/results?search_query") {
 	/* Search rules */
 	if search-revert-big-mode {
-		ytd-video-renderer[use-search-ui] ytd-thumbnail.ytd-video-renderer {
+		#contents > ytd-video-renderer[use-search-ui] ytd-thumbnail.ytd-video-renderer {
 			max-width: search-thumbnail-max !important;
 			min-width: search-thumbnail-min !important;
 		}
-		
+
 		/* Fix stacked video collection size */
-		yt-lockup-view-model.ytd-item-section-renderer.lockup > div > div.yt-lockup-view-model-wiz__content-image {
+		#contents > yt-lockup-view-model.ytd-item-section-renderer.lockup > div > div.yt-lockup-view-model-wiz__content-image {
+			max-width: search-thumbnail-max !important;
+			min-width: search-thumbnail-min !important;
+		}
+
+		/* fix playlist */
+		#contents > yt-lockup-view-model.ytd-item-section-renderer.lockup > div > a.yt-lockup-view-model-wiz__content-image {
+			max-width: search-thumbnail-max !important;
+			min-width: search-thumbnail-min !important;
+		}
+
+		/* fix channels */
+		#contents > ytd-channel-renderer > #content-section > #avatar-section {
 			max-width: search-thumbnail-max !important;
 			min-width: search-thumbnail-min !important;
 		}
