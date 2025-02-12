@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Wikia Fixer
 @namespace      github.com/thunder33345/wikiafixer
-@version        0.0.7
+@version        0.0.8
 @description    Fixes ugly wikia/fandom. Options included.
 @author         Thunder
 @license        BSD-2-Clause
@@ -23,7 +23,7 @@ copyright 2021 Thunder
 	if disable-nav {
 		/*Disable left global navigator bar crap*/
 		.global-navigation {
-			display: none !important
+			/* 			display: none !important */
 		}
 
 		.global-explore-navigation {
@@ -32,6 +32,14 @@ copyright 2021 Thunder
 
 		.global-top-navigation {
 			display: none !important
+		}
+
+		/* force community nav to always show*/
+		/* wikia used some annoying js and is-visible classes to hide it by default */
+		/* since we hidden the global nav, now community nav will never show up due to that */
+		/* sideffect: the nav will always be shown now */
+		.community-navigation {
+			transform: translateY(100%);
 		}
 
 		/*Reset margin and width since navigator is gone*/
