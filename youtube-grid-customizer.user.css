@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Youtube Grid Customizer
 @namespace      github.com/thunder33345/youtube-grid
-@version        0.0.111
+@version        0.0.13
 @description    Allow customizing videos per row in youtube video grids
 @author         Thunder
 @license        BSD-2-Clause
@@ -34,6 +34,8 @@ copyright 2024 Thunder
 @var number font-size-video-info "All: Grid video info size(rem)" [1.15, -1, 10, 0.01, "rem"]
 @var number item-thumbnail-round "All: Grid thumbnail roundness(px)" [12, -1, 100, 0.01, "px"]
 
+@var checkbox debug-mode "Debug: Enable debug mode" 0
+
 Code for grids originally from https://www.reddit.com/r/youtube/comments/125nbtz/how_to_change_number_of_videos_per_row_how_to/
 Code for font size originally from https://www.reddit.com/r/youtube/comments/141ts0q/comment/jnej6z8/
 ==/UserStyle== */
@@ -54,6 +56,18 @@ Code for font size originally from https://www.reddit.com/r/youtube/comments/141
 			.ghost-grid.ytd-ghost-grid-renderer {
 				width: calc(var(--ytd-rich-grid-content-max-width) + var(--ytd-rich-grid-item-margin));
 				margin: 0 0px;
+			}
+
+			/* fix items not occupying full row, leaving empty space on the right */
+			#contents > ytd-rich-item-renderer[rendered-from-rich-grid] {
+				--ytd-rich-item-row-usable-width: calc(100%);
+				/* make width exclude item margin, since we dont use extra item margin we need to take up the slack */
+				width: calc(var(--ytd-rich-item-row-usable-width)/var(--ytd-rich-grid-items-per-row) - var(--ytd-rich-grid-item-margin) - .01px);
+			}
+
+			/* fix issue where grid doesnt line up because we changed the "first" item in column */
+			#contents > ytd-rich-item-renderer[rendered-from-rich-grid][is-in-first-column] {
+				margin-left: calc(var(--ytd-rich-grid-item-margin)/2);
 			}
 		}
 	}
@@ -170,6 +184,24 @@ url("https://www.youtube.com/") {
 			ytd-rich-item-renderer[is-slim-grid]:last-of-type {
 				margin-right: calc(var(--ytd-rich-grid-item-margin)/2)
 			}
+
+			/* fix issue where grid doesnt line up because we changed the "first" item in column */
+			#contents > ytd-rich-item-renderer[rendered-from-rich-grid][is-in-first-column] {
+				margin-left: calc(var(--ytd-rich-grid-item-margin)/2);
+			}
+
+			/*remove margin borders on edge*/
+			/*
+			#contents > ytd-rich-item-renderer[rendered-from-rich-grid]:nth-child({grid-per-row-channel}n + 1) {
+				background: red if debug-mode;
+				margin-left: unset;
+			}
+
+			#contents > ytd-rich-item-renderer[rendered-from-rich-grid]:nth-child({grid-per-row-channel}n) {
+				background: blue if debug-mode;
+				margin-right: unset;
+			}
+			*/
 		}
 	}
 }
