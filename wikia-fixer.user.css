@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           Wikia Fixer
 @namespace      github.com/thunder33345/wikiafixer
-@version        0.0.8
+@version        0.0.9
 @description    Fixes ugly wikia/fandom. Options included.
 @author         Thunder
 @license        BSD-2-Clause
@@ -37,7 +37,7 @@ copyright 2021 Thunder
 		/* force community nav to always show*/
 		/* wikia used some annoying js and is-visible classes to hide it by default */
 		/* since we hidden the global nav, now community nav will never show up due to that */
-		/* sideffect: the nav will always be shown now */
+		/* sideffect: the community nav will always be shown now */
 		.community-navigation {
 			transform: translateY(100%);
 		}
@@ -65,9 +65,35 @@ copyright 2021 Thunder
 	}
 
 	if disable-header {
-		/*Disables header*/
+		/*Disables floating global nav for simplicity reasons*/
+		.global-top-navigation {
+			display: none;
+			position: unset;
+		}
+
+		/*Disables floating wiki nav for fandom*/
 		.fandom-sticky-header {
-			display: none
+			position: absolute;
+			/*gotta remove the transition else it looks weird*/
+			transition: none;
+			/* fandom nav bar has a negative top value*/
+			/* when we set the new relative position, this means the fandom header gets covered expanding the bottom*/
+			/*if we disable the global nav, we need to "raise" the header, otherwise it will be out of view*/
+			top: 0px unless disable-nav;
+		}
+
+		.fandom-sticky-header.is-visible {
+			transition: none;
+		}
+
+		/*left global nav rail*/
+		/*mostly a hack to make the left rail look more "presentable" if the header isnt floating, otherwise there will be a blank gap*/
+		.global-explore-navigation {
+			top: 0px;
+		}
+
+		.global-explore-navigation .global-explore-navigation__top {
+			padding-top: 58px;
 		}
 	}
 
