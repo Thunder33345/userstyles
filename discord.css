@@ -6,6 +6,9 @@
  * @source https://github.com/Thunder33345/userstyles
  * @website https://github.com/Thunder33345
 */
+/* If you are reading this, you probably should use something else instead, these are rules personally hand crafted to alter the website to my own taste */
+/* Rules here may come and go, there is no guarantee of anything, consider copying rules that you want instead of using this whole stylesheet as is*/
+/* Also see: https://github.com/CroissantDuNord/discord-adblock */
 
 /* I dont need stinking warning about what experiments is */
 #vc-experiments-warning-card {
@@ -133,4 +136,14 @@ section[class*="positionContainer_"][aria-label="Application Launcher"][role="di
 [class*="drawerSizingWrapper_"] > [class*="contentWrapper_"] 
 [class*="container_"] > [class*="scrollableContent_"] > div > div:nth-child(n+3) {
     display: none
+}
+
+/* Undiscover servers */
+nav[aria-label="Servers sidebar"] ul div[class*=footer_] {
+    display: none;
+}
+
+/* remove new channel badge on channel browser */
+div[class*=newChannel_][class*=textBadge_] {
+    display: none;
 }
