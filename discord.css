@@ -147,3 +147,31 @@ nav[aria-label="Servers sidebar"] ul div[class*=footer_] {
 div[class*=newChannel_][class*=textBadge_] {
     display: none;
 }
+
+/* disable annoying flashy profile effects */
+div[class*=profileEffects_] {
+    display: none;
+}
+
+/* VISUAL REFRESH COLLECTION */
+/* resize the top space hogging titlebar */
+@supports (grid-template-columns: subgrid) and (white-space-collapse:collapse) {
+    .visual-refresh [class*=base_] {
+        grid-template-rows: [top] 10px [titleBarEnd] min-content [noticeEnd] 1fr [end];
+    }
+}
+
+/* reduce hitbox for title bar(affect double clicking and stealing inputs*/
+div[class*=base_] > div[class*=bar_] {
+    min-height: 10px
+}
+
+/* hide chopped current server name */
+div[class*=base_] > div[class*=bar_] > div[class*=title_] {
+    display: none;
+}
+
+/* Align account bottom with text bar bottom */
+.visual-refresh div[class*=base_] > div[class*=content_] > div[class*=sidebar_] > section[class*=panels_] {
+    bottom: calc(var(--space-xs)* 3)
+}
