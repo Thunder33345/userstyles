@@ -157,7 +157,7 @@ div[class*=profileEffects_] {
 /* resize the top space hogging titlebar */
 @supports (grid-template-columns: subgrid) and (white-space-collapse:collapse) {
     .visual-refresh [class*=base_] {
-        grid-template-rows: [top] 10px [titleBarEnd] min-content [noticeEnd] 1fr [end];
+        grid-template-rows: [top] 12px [titleBarEnd] min-content [noticeEnd] 1fr [end];
     }
 }
 
@@ -168,6 +168,14 @@ div[class*=base_] > div[class*=bar_] {
 
 /* hide chopped current server name */
 div[class*=base_] > div[class*=bar_] > div[class*=title_] {
+    display: none;
+}
+
+/* Hide chopped off icons */
+div[class*=base_] > div[class*=bar_] > div[class*=trailing_] > div[class*=recentsIcon_] {
+    display: none;
+}
+div[class*=base_] > div[class*=bar_] > div[class*=trailing_] > a[class*=anchor_][href="https://support.discord.com"] {
     display: none;
 }
 
