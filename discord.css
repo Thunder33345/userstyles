@@ -183,3 +183,11 @@ div[class*=base_] > div[class*=bar_] > div[class*=trailing_] > a[class*=anchor_]
 .visual-refresh div[class*=base_] > div[class*=content_] > div[class*=sidebar_] > section[class*=panels_] {
     bottom: calc(var(--space-xs)* 3)
 }
+
+/* No thanks i dont need wordle in my command picker */
+div[class*=autocomplete_]>div[class*=autocompleteInner_]>div[class*=rail_]>div[class*=wrapper_]>div[class*=scroller_]>div[role="list"]>div[class*=section_]:has(div[aria-label="Wordle"]) {
+    display: none;
+}
+div[class*=autocomplete_]>div[class*=autocompleteInner_]>div[class*=scroller_][class*=list_] > div[role="listbox"] > ul[role="group"][aria-label="Wordle"] {
+    display: none;
+}
