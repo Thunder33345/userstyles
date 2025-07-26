@@ -29,6 +29,20 @@ div > div > button[aria-label="Open sticker picker"] {
 	display: none;
 }
 
+/* v2 chatbar cleanup */
+div > div[aria-label="Send a gift"] {
+	display: none;
+}
+
+div > div[aria-label="Open GIF picker"] {
+	display: none;
+}
+
+div > div[aria-label="Open sticker picker"] {
+	display: none;
+}
+
+
 /* category gap reduction  */
 :root {
 	--custom-category-channel-space-before-category: 2px;
@@ -189,5 +203,15 @@ div[class*=autocomplete_]>div[class*=autocompleteInner_]>div[class*=rail_]>div[c
     display: none;
 }
 div[class*=autocomplete_]>div[class*=autocompleteInner_]>div[class*=scroller_][class*=list_] > div[role="listbox"] > ul[role="group"][aria-label="Wordle"] {
+    display: none;
+}
+
+/* no i dont need an ai image editor */
+div[class*=hoverButton_][aria-label="Edit Image with Apps"] {
+    display: none;
+}
+
+/* remove accidental landmine in server settings */
+div[class*=item_][aria-label="App Directory"]{
     display: none;
 }
