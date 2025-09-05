@@ -8,7 +8,195 @@
 copyright 2021 Thunder
 
 @homepageURL https://github.com/Thunder33345/userstyles
+@updateURL   https://github.com/Thunder33345/userstyles/raw/mast/* ==UserStyle==
+@name           Wikia Fixer
+@namespace      github.com/thunder33345/wikiafixer
+@version        0.0.9
+@description    Fixes ugly wikia/fandom. Options included.
+@author         Thunder
+@license        BSD-2-Clause
+copyright 2021 Thunder
+
+@homepageURL https://github.com/Thunder33345/userstyles
 @updateURL   https://github.com/Thunder33345/userstyles/raw/master/wikia-fixer.user.css
+
+@preprocessor stylus
+@var checkbox disable-nav "Disable the global navigator" 1 
+@var checkbox disable-header "Disable the sticky header" 0
+@var checkbox disable-footer "Disable the fandom footer" 0
+@var checkbox disable-highlighter "Disable the fandom search highlighter" 1
+@var checkbox disable-right-rail "Disable the fandom right rail" 1
+@var checkbox disable-right-rail-junk "Disable the fandom right rail junk" 1
+@var checkbox disable-right-rail-junk-search "Disable the fandom right rail junk in search" 1
+@var checkbox disable-quick-answer "Disable the fandom quick answers section" 1
+==/UserStyle== */
+@-moz-document domain("fandom.com") {
+	if disable-nav {
+		/*Disable left global navigator bar crap*/
+		.global-navigation {
+			/* 			display: none !important */
+		}
+
+		.global-explore-navigation {
+			display: none !important
+		}
+
+		.global-top-navigation {
+			display: none !important
+		}
+
+		/* force community nav to always show*/
+		/* wikia used some annoying js and is-visible classes to hide it by default */
+		/* since we hidden the global nav, now community nav will never show up due to that */
+		.community-navigation {
+			transform: translateY(100%);
+		}
+
+		/*Reset margin and width since navigator is gone*/
+		.main-container {
+			margin-left: 0px;
+			width: auto
+		}
+
+		/* Reset banner height */
+		.main-container > div.fandom-community-header__background.cover.header {
+			transform: unset
+		}
+
+		/*Header fix since navigator is gone*/
+		.fandom-sticky-header {
+			left: 0
+		}
+
+		/* Fix mainpage gap https://www.fandom.com who even looks at this anyways*/
+		body.f2-page:not(.article-editor-body):not(.no-global-nav) {
+			margin-left: auto;
+		}
+	}
+
+	if disable-header {
+		/*Disables floating global nav for simplicity reasons*/
+		.global-top-navigation {
+			display: none;
+			position: unset;
+		}
+
+		/*Disables floating wiki nav for fandom*/
+		.fandom-sticky-header {
+			position: absolute;
+			/*gotta remove the transition else it looks weird*/
+			transition: none;
+			/* fandom nav bar has a negative top value*/
+			/* when we set the new relative position, this means the fandom header gets covered expanding the bottom*/
+			/*if we disable the global nav, we need to "raise" the header, otherwise it will be out of view*/
+			top: 0px unless disable-nav;
+		}
+
+		.fandom-sticky-header.is-visible {
+			transition: none;
+		}
+
+		/*left global nav rail*/
+		/*mostly a hack to make the left rail look more "presentable" if the header isnt floating, otherwise there will be a blank gap*/
+		.global-explore-navigation {
+			top: 0px;
+		}
+
+		.global-explore-navigation .global-explore-navigation__top {
+			padding-top: 58px;
+		}
+	}
+
+	if disable-highlighter {
+		#highlight__main-container {
+			display: none
+		}
+	}
+
+	/*Tries to disable useless ads that take up space(on best effort, use adblocker instead)*/
+	.ad-slot-placeholder,
+	.bottom-ads-container {
+		display: none
+	}
+
+	if disable-right-rail {
+		/*disable space hogger on the right of the main content, blocks: "Popular Pages" and "Others like you also viewed"*/
+		.page__right-rail {
+			display: none
+		}
+	}
+
+	if disable-right-rail-junk {
+		/*disables the recommendations on the rail*/
+		.page__right-rail .right-rail-wrapper .sticky-modules-wrapper {
+			display: none !important
+		}
+
+		.page__right-rail .right-rail-wrapper .render-wiki-recommendations-right-rail {
+			display: none !important
+		}
+	}
+
+	if disable-right-rail-junk-search {
+		.unified-search__layout > .unified-search__layout__right-rail {
+			display: none
+		}
+	}
+
+	if disable-quick-answer {
+		/* Disable "Quick Answers", filled with irrelevant answers */
+		section.trfc161 {
+			display: none
+		}
+	}
+
+	/*Remove the annoying floating bar at the bottom right*/
+	#WikiaBar {
+		display: none
+	}
+
+	/*Remove "Others like you also viewed" recommendation*/
+	.render-wiki-recommendations {
+		display: none
+	}
+
+	/*Disables "more [unrelated] content" crap at the end of page*/
+	#mixed-content-footer {
+		display: none
+	}
+
+	/* Mobile: Disable junk recommendation at the bottom */
+	.recirculation-prefooter {
+		display: none
+	}
+
+	/* Disable obstructive age gate */
+	#age-gate {
+		display: none !important
+	}
+
+	if disable-footer {
+		.global-footer__content {
+			display: none
+		}
+	}
+
+	/* MOBILE SECTION */
+	/* annoying bottom banner */
+	div.wds-mobile-drawer {
+		display: none !important
+	}
+
+	/* gunk on my search box */
+	.mobile-search-modal > .mobile-search-modal__content > .mobile-search-modal__links {
+		display: none !important
+	}
+
+	/* more fandom crap at footer */
+	.page-footer__trfc-147 {
+		display: none !important
+	}
+}er/wikia-fixer.user.css
 
 @preprocessor stylus
 @var checkbox disable-nav "Disable the global navigator" 1 
@@ -180,3 +368,4 @@ copyright 2021 Thunder
 		display: none !important
 	}
 }
+
