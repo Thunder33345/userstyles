@@ -128,6 +128,11 @@ ul[role="list"][aria-label="Direct Messages"] div[class*="interactive_"] a[href=
     display: none
 }
 
+/* hides quest button */
+ul[role="list"][aria-label="Direct Messages"] div[class*="interactive_"] a[href="/quest-home"] {
+    display: none
+}
+
 /* not so new: remove "new" badge on channels */
 #channels > ul  > li[class*="containerDefault_"] > div a[role=link] div[class^="children_"] > div[class^=channelInfo] > div[class^="newChannel_"] {
  display: none !important;
