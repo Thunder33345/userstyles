@@ -29,6 +29,10 @@ div > div[aria-label="Open sticker picker"] {
 	display: none;
 }
 
+/* Hide ugly large diffused gradient on chatbar during slowmode */
+main[class*=chatContent] div[class*=-chatGradientBase][class*=-chatTypingGradientNotAtBottom] {
+    display: none;
+}
 
 /* category gap reduction  */
 :root {
@@ -89,13 +93,19 @@ ul[role="list"][aria-label="Direct Messages"] div[class*="-interactive"] a[href=
     display: none
 }
 
+
+/* Hide browse channel selector's new badge */
+div[class*=-basicChannelRowLink] > div[class*=content] > div[class*=-newChannel][class*=-textBadge]{
+    display: none;
+}
+
 /* not so new: remove "new" badge on channels */
 #channels > ul  > li[class*="-containerDefault"] > div a[role=link] div[class*="-children"] > div[class*=-channelInfo] > div[class*="-newChannel"] {
  display: none !important;
 }
 
 /* remove new channel badge on channel browser */
-div[class*=newChannel_][class*=textBadge] {
+div[class*=newChannel][class*=textBadge] {
     display: none;
 }
 
