@@ -34,6 +34,16 @@ main[class*=chatContent] div[class*=-chatGradientBase][class*=-chatTypingGradien
     display: none;
 }
 
+/* remove CTA in thread list for empty threads */
+[class*="-replies"]:has([class*="-startTheConversation"]) {
+	display: none;
+}
+
+/* remove CTA above chat bar in empty threads */
+ol[class*="scrollerInner"][data-list-id="chat-messages"] [class*="box"]:has([class*="animation"]) {
+	display: none;
+}
+
 /* category gap reduction  */
 :root {
 	--custom-category-channel-space-before-category: 2px;
