@@ -17,19 +17,6 @@
 
 /* chat bar cleanup */
 div > div[aria-label="Send a personalized Nitro gift to spread holiday cheer!"],
-div > button[aria-label="Send a gift"] {
-	display: none;
-}
-
-div > div > button[aria-label="Open GIF picker"] {
-	display: none;
-}
-
-div > div > button[aria-label="Open sticker picker"] {
-	display: none;
-}
-
-/* v2 chatbar cleanup */
 div > div[aria-label="Send a gift"] {
 	display: none;
 }
@@ -69,77 +56,51 @@ div > div[aria-label="Open sticker picker"] {
     text-overflow: ellipsis;
     max-width: 2px;
 } */
-/* remove CTA in thread list for empty threads */
-[class*="replies_"]:has([class*="startTheConversation_"]) {
-	display: none;
-}
-
-/* remove CTA in thread chat view for empty threads */
-ol[class*="scrollerInner_"][data-list-id="chat-messages"] [class*="box_"]:has([class*="animation_"]) {
-	display: none;
-}
 
 /* remove minor nitro upsell nag at chat input for count nearing limit */
-div[class*="characterCount_"] div[class*="upsell"] {
+div[class*="-characterCount"] div[class*="-upsell"] {
 	display: none;
 }
 
-/* remove major nitro upsell nag at chat input for count over character limit */
-div[class*="characterCount_"] div[class*="messageLengthBrandedContainer_"] {
-	display: none;
-}
-/* remove major nitro upsell nag: upsell divider  */
-div[class*="characterCount_"] div[class*="divider_"] {
-	display: none;
-}
-/* remove major nitro upsell nag: upsell button  */
-div[class*="characterCount_"] div[class*="messageLengthBrandedContainer_"]+button {
-	display: none;
-}
-
-/* remove green nitro cta button at upload as text prompt */
-div[aria-label="Your message is too long..."][role="dialog"][class*="focusLock_"] div[class*="content_"] div[class*=gradientUpsellWrapper_] {
+/* remove green nitro CTA button at upload as text as file prompt */
+div[aria-label="Your message is too long..."][role="dialog"][class*=-focusLock] button[class*="-shinyButton"]:has(div[class*=-premiumSubscribeButton]) {
     display: none;
-}
-/* remove subscribe button from upload text as file prompt */
-div[aria-label="Your message is too long..."][role="dialog"][class*=focusLock] div[class*=primaryActions_] button[class*=shinyButton]:has(div svg[class*=premiumIcon_]) {
-	display: none;
-}
-
-/* remove activities prompt in voice channel */
-div[class*="row"]:has(div[class*=tile_] div[class*=outer_][class*=tileSizer_] div[class*=inner_] div[class*=root] img[alt="characters playing a game"]) {
-	display: none;
 }
 
 /* hides home shop button */
 /* hotfix: couldnt hide the shop hover effect */
-ul[role="list"][aria-label="Direct Messages"] div[class*="interactive_"] a[href="/shop"] {
+ul[role="list"][aria-label="Direct Messages"] div[class*="-interactive"] a[href="/shop"] {
     display: none
 }
 
 /* hides home shop new badge */
-/* a[href="/shop"] div[class*="textBadge_"] {
+/* a[href="/shop"] div[class*="-textBadge"] {
     display: none
 } */
 
 /* hides home nitro button */
 /* hotfix: too lazy to remove the "new features" nag popups so just nuke the whole thing instead*/
-ul[role="list"][aria-label="Direct Messages"] div[class*="interactive_"] a[href="/store"] {
+ul[role="list"][aria-label="Direct Messages"] div[class*="-interactive"] a[href="/store"] {
     display: none
 }
 
 /* hides quest button */
-ul[role="list"][aria-label="Direct Messages"] div[class*="interactive_"] a[href="/quest-home"] {
+ul[role="list"][aria-label="Direct Messages"] div[class*="-interactive"] a[href="/quest-home"] {
     display: none
 }
 
 /* not so new: remove "new" badge on channels */
-#channels > ul  > li[class*="containerDefault_"] > div a[role=link] div[class^="children_"] > div[class^=channelInfo] > div[class^="newChannel_"] {
+#channels > ul  > li[class*="-containerDefault"] > div a[role=link] div[class*="-children"] > div[class*=-channelInfo] > div[class*="-newChannel"] {
  display: none !important;
 }
 
+/* remove new channel badge on channel browser */
+div[class*=newChannel_][class*=textBadge] {
+    display: none;
+}
+
 /* who needs help?  */
-div[class*=toolbar_] a:has(div[aria-label="Help"]) {
+div[class*=-toolbar] a:has(div[aria-label="Help"]) {
     display: none;
 }
 
@@ -151,19 +112,14 @@ span[class^=botText], span[class^=unselectable] {
 }
 
 /* stop plastering my activities palette with ads */
-section[class*="positionContainer_"][aria-label="Application Launcher"][role="dialog"] > 
-[class*="drawerSizingWrapper_"] > [class*="contentWrapper_"] 
-[class*="container_"] > [class*="scrollableContent_"] > div > div:nth-child(n+3) {
+section[class*="positionContainer"][aria-label="Application Launcher"][role="dialog"] > 
+[class*="drawerSizingWrapper"] > [class*="contentWrapper"] 
+[class*="container"] > [class*="scrollableContent"] > div > div:nth-child(n+3) {
     display: none
 }
 
 /* Undiscover servers */
-nav[aria-label="Servers sidebar"] ul div[class*=footer_] {
-    display: none;
-}
-
-/* remove new channel badge on channel browser */
-div[class*=newChannel_][class*=textBadge_] {
+nav[aria-label="Servers sidebar"] ul div[class*=footer] {
     display: none;
 }
 
@@ -175,48 +131,44 @@ div[class*=profileEffects_] {
 /* VISUAL REFRESH COLLECTION */
 /* resize the top space hogging titlebar */
 @supports (grid-template-columns: subgrid) and (white-space-collapse:collapse) {
-    .visual-refresh [class*=base_] {
-        grid-template-rows: [top] 12px [titleBarEnd] min-content [noticeEnd] 1fr [end];
+    .visual-refresh [class*=-base] {
+        grid-template-rows: [top] 16px [titleBarEnd] min-content [noticeEnd] 1fr [end];
     }
 }
 
 /* reduce hitbox for title bar(affect double clicking and stealing inputs*/
-div[class*=base_] > div[class*=bar_] {
-    min-height: 10px
+div[class*=base] > div[class*=bar] {
+    min-height: 1px;
+    max-height: 16px;
 }
 
 /* hide chopped current server name */
-div[class*=base_] > div[class*=bar_] > div[class*=title_] {
+div[class*=base] > div[class*=bar] > div[class*=title] {
     display: none;
 }
 
 /* Hide chopped off icons */
-div[class*=base_] > div[class*=bar_] > div[class*=trailing_] > div[class*=recentsIcon_] {
+div[class*=base] > div[class*=bar] > div[class*=trailing] > div[class*=recentsIcon] {
     display: none;
 }
-div[class*=base_] > div[class*=bar_] > div[class*=trailing_] > a[class*=anchor_][href="https://support.discord.com"] {
+div[class*=base] > div[class*=bar] > div[class*=trailing] > a[class*=anchor][href="https://support.discord.com"] {
     display: none;
-}
-
-/* Align account bottom with text bar bottom */
-.visual-refresh div[class*=base_] > div[class*=content_] > div[class*=sidebar_] > section[class*=panels_] {
-    bottom: calc(var(--space-xs)* 3)
 }
 
 /* No thanks i dont need wordle in my command picker */
-div[class*=autocomplete_]>div[class*=autocompleteInner_]>div[class*=rail_]>div[class*=wrapper_]>div[class*=scroller_]>div[role="list"]>div[class*=section_]:has(div[aria-label="Wordle"]) {
+div[class*=autocomplete]>div[class*=autocompleteInner]>div[class*=rail]>div[class*=wrapper]>div[class*=scroller]>div[role="list"]>div[class*=section]:has(div[aria-label="Wordle"]) {
     display: none;
 }
-div[class*=autocomplete_]>div[class*=autocompleteInner_]>div[class*=scroller_][class*=list_] > div[role="listbox"] > ul[role="group"][aria-label="Wordle"] {
+div[class*=autocomplete]>div[class*=autocompleteInner]>div[class*=scroller][class*=list] > div[role="listbox"] > ul[role="group"][aria-label="Wordle"] {
     display: none;
 }
 
 /* no i dont need an ai image editor */
-div[class*=hoverButton_][aria-label="Edit Image with Apps"] {
+div[class*=hoverButton][aria-label="Edit Image with Apps"] {
     display: none;
 }
 
 /* remove accidental landmine in server settings */
-div[class*=item_][aria-label="App Directory"]{
+div[class*=-item][aria-label="App Directory"]{
     display: none;
 }
